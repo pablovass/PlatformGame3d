@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]private float jumpForce = 5;
     [SerializeField] private float gravityMultiplier;
-    private bool isOnGround = true;
+    private bool isOnGround = true; 
+    //public bool gameOver = false; always is falses
+    public bool gameOver;
     
     private Rigidbody playerRb;
     // Start is called before the first frame update
@@ -36,6 +38,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground")) //SOLO SALTA SI esta en el suelo
         {
             isOnGround = true;    
+        }
+
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            gameOver = true;
+            Debug.Log("Game Over");
         }
         
     }
