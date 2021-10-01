@@ -15,11 +15,19 @@ public class PlayerController : MonoBehaviour
     public bool GameOver { get=>_gameOver; }
     
     private Rigidbody playerRb;
+
+    private Animator _animator;
+    
+
+    private bool IsMovingJump = true;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityMultiplier;
+        
+        _animator = GetComponent<Animator>();
+       
 
     }
 
@@ -29,6 +37,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             playerRb.AddForce(Vector3.up*jumpForce,ForceMode.Impulse); //F=m*a
+            IsMovingJump = !IsMovingJump;
+            _animator.SetTrigger("Jump_trig");
             isOnGround = false;
         } 
         
