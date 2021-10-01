@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !GameOver)
         {
             playerRb.AddForce(Vector3.up*jumpForce,ForceMode.Impulse); //F=m*a
             IsMovingJump = !IsMovingJump;
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour
         {
             _gameOver = true;
             Debug.Log("Game Over");
+            _animator.SetBool("Death_b",true);
+            _animator.SetInteger("DeathType_int",1);
         }
         
     }
