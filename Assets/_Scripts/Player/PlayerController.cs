@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityMultiplier;
     private bool isOnGround = true; 
     //public bool gameOver = false; always is falses
-    public bool gameOver;
+    private bool _gameOver;
+    public bool GameOver { get=>_gameOver; }
     
     private Rigidbody playerRb;
     // Start is called before the first frame update
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            gameOver = true;
+            _gameOver = true;
             Debug.Log("Game Over");
         }
         
